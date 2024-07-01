@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta nom="viewport" content="width=device-width, initial-scale=1.0">
+    <title>produit List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .actions button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .actions button:hover {
+            background-color: #2980b9;
+        }
+
+        .actions .delete {
+            background-color: #e74c3c;
+        }
+
+        .actions .delete:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>produit List</h1>
+        <table id="produit-table">
+            <thead>
+                <tr>
+                    <th>nom</th>
+                    <th>prix</th>
+                    <th>quantite</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les lignes de produits seront insérées ici dynamiquement -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const produitTable = document.getElementById('produit-table').getElementsByTagnom('tbody')[0];
+            //- let produits = [
+            //-     { id: 1, nom: 'produit 1', prix: 10.00, quantite: 100 },
+            //-     { id: 2, nom: 'produit 2', prix: 20.00, quantite: 200 },
+            //-     { id: 3, nom: 'produit 3', prix: 30.00, quantite: 300 },
+            //- ];
+
+            // Fonction pour afficher les produits dans le tableau
+            const renderproduits = () => {
+                produitTable.innerHTML = '';
+                produits.forEach(produit => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${produit.nom}</td>
+                        <td>${produit.prix}</td>
+                        <td>${produit.quantite}</td>
+                        <td class="actions">
+                            <button onclick="editproduit(${produit.id})">Edit</button>
+                            <button class="delete" onclick="deleteproduit(${produit.id})">Delete</button>
+                        </td>
+                    `;
+                    produitTable.appendChild(row);
+                });
+            };
+
+            // Fonction pour gérer l'édition d'un produit
+            window.editproduit = (id) => {
+                const produit = produits.find(p => p.id == id);
+                alert(`Edit produit: ${produit.nom}`);
+            };
+
+            // Fonction pour gérer la suppression d'un produit
+            window.deleteproduit = (id) => {
+                produits = produits.filter(p => p.id != id);
+                renderproduits();
+            };
+
+            // Afficher les produits au chargement de la page
+            renderproduits();
+        });
+    </script>
+</body>
+</html>
